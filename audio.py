@@ -2,6 +2,8 @@ import speech_recognition as sr
 import time
 from threading import Thread
 from flask import Flask, jsonify
+import time
+import sched, time
 
 server = Flask(__name__)
 dict = {}
@@ -40,8 +42,14 @@ try:
     # for testing purposes, we're just using the default API key
     # to use another API key, use `r.recognize_google(audio, key="GOOGLE_SPEECH_RECOGNITION_API_KEY")`
     # instead of `r.recognize_google(audio)`
-    print("You said: " + r.recognize_google(audio))
-	
+    heardVoice = r.recognize_google(audio)
+    checkString = "emergency detected"
+    checkVideo = "share video"
+    s = sched.scheduler(time.time, time.sleep)
+    print("You said: " + heardVoice)
+    if checkString in heardVoice:
+        s.enter(0.3, checkVideo in heardVoice, (sched))
+        print(heardVoice)
 except sr.UnknownValueError:
     print("Google Speech Recognition could not understand audio")
 except sr.RequestError as e:
