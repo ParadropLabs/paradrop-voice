@@ -2,10 +2,9 @@ name: paradrop-voice
 version: 0.1
 summary: Enable voice output and recognition for Paradrop nodes.
 description: |
-  This is my-snap's description. You have a paragraph or two to tell the
-  most important story about your snap. Keep it under 100 words though,
-  we live in tweetspace and your description wants to look good in the snap
-  store.
+  This snap provides a voice recognition service with an HTTP API available on
+  port 8278. It connects to PulseAudio for text-to-speech output and microphone
+  input.
 
 grade: stable
 confinement: strict
@@ -18,7 +17,9 @@ apps:
     environment:
       ESPEAK_DATA_PATH: $SNAP/usr/lib/x86_64-linux-gnu
     plugs:
+      - mount-observe
       - network
+      - network-bind
       - pulseaudio
 
 parts:
