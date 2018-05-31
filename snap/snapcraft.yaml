@@ -13,8 +13,10 @@ confinement: strict
 apps:
   paradrop-voice:
     command: paradrop-voice
-#    daemon: simple
+    daemon: simple
     restart-condition: always
+    environment:
+      ESPEAK_DATA_PATH: $SNAP/usr/lib/x86_64-linux-gnu
     plugs:
       - network
       - pulseaudio
@@ -25,6 +27,7 @@ parts:
     python-version: python3
     source: .
     stage-packages:
+      - libespeak1
       - libpocketsphinx3
       - libpulse0
     organize:

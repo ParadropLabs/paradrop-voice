@@ -1,3 +1,3 @@
-from . import voice
+from . import server
 
-voice.main()
+server.main()

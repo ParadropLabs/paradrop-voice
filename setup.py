@@ -14,14 +14,14 @@ setup(name="paradrop-voice",
           "idna==2.6",
           "numpy==1.14.3",
           "pocketsphinx==0.1.3",
-          "PyAudio==0.2.11",
+          "pyttsx3==2.7",
           "requests==2.18.4",
           "scipy==1.1.0",
           "urllib3==1.22"
       ],
       entry_points={
           "console_scripts": [
-              "paradrop-voice = voice.voice:main"
+              "paradrop-voice = voice.server:main"
           ]
       }
 )
