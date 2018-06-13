@@ -76,7 +76,18 @@ Response
 
 ```
 {
-    "id": 2
+    "created_time": 1528926166.0225773,
+    "detected": false,
+    "detected_time": null,
+    "id": 2,
+    "message": "If you would like to turn on this feature, say enable.",
+    "played": false,
+    "played_time": 1528926166.0246336,
+    "search": "enable",
+    "search_started": false,
+    "search_started_time": null,
+    "timed_out": false,
+    "timeout": 20
 }
 ```
 
@@ -86,18 +97,17 @@ GET /prompts/:id
 
 ```json
 {
-
-    "created_time": 1528815030.3894348,
+    "created_time": 1528926166.0225773,
     "detected": false,
     "detected_time": null,
-    "id": 1,
-    "message": null,
-    "played": false,
-    "played_time": null,
-    "search": "paradrop",
+    "id": 2,
+    "message": "If you would like to turn on this feature, say enable.",
+    "played": true,
+    "played_time": 1528926166.0246336,
+    "search": "enable",
     "search_started": true,
-    "search_started_time": 1528815030.3896816,
-    "timed_out": false,
-    "timeout": null
+    "search_started_time": 1528926168.581094,
+    "timed_out": true,
+    "timeout": 20
 }
 ```
