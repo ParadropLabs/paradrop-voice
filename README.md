@@ -74,7 +74,7 @@ POST /prompts
 
 Response
 
-```
+```json
 {
     "created_time": 1528926166.0225773,
     "detected": false,
