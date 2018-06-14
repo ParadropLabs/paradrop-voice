@@ -28,6 +28,7 @@ parts:
     python-version: python3
     source: .
     build-packages:
+      - libpulse-dev
       - swig
     stage-packages:
       - libespeak1
