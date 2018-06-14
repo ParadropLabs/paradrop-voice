@@ -8,8 +8,6 @@ import queue
 import sphinxbase
 from pocketsphinx import Decoder, get_model_path
 
-from . import server
-
 
 def get_decoder_config():
     """
@@ -198,9 +196,3 @@ class VoiceService(object):
                 self.current_prompt = None
 
             self.in_speech = self.decoder.get_in_speech()
-
-
-def main():
-    voice = VoiceService()
-    server.start_server()
-    voice.run()
