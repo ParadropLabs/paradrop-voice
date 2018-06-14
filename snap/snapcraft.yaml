@@ -27,6 +27,8 @@ parts:
     plugin: python
     python-version: python3
     source: .
+    build-packages:
+      - swig
     stage-packages:
       - libespeak1
       - libpocketsphinx3
