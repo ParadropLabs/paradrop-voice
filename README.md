@@ -3,6 +3,8 @@
 This is an add-on module for Paradrop that provides text-to-speech and
 speech recognition capabilities.
 
+[![Snap Status](https://build.snapcraft.io/badge/ParadropLabs/paradrop-voice.svg)](https://build.snapcraft.io/user/ParadropLabs/paradrop-voice)
+
 ## Building paradrop-voice
 
 The project is designed to be built as a snap. This requires snapcraft
