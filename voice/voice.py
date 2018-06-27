@@ -77,7 +77,7 @@ class VoiceService(object):
             "search_started_time": None,
             "played": False,
             "played_time": None,
-            "timeout": timeout,
+            "timeout": float(timeout),
             "timed_out": False
         }
         self.prompts[str(prompt['id'])] = prompt
