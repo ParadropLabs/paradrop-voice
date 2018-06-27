@@ -65,7 +65,13 @@ class VoiceService(object):
 
         The status of the prompt can be retrieved by calling get_prompt with
         the appropriate id.
+
+        timeout: prompt timeout in seconds, expected to be either None or numeric.
         """
+        if timeout is not None:
+            # Be forgiving of caller who may have passed timeout as a string.
+            timeout = float(timeout)
+
         prompt = {
             "created_time": time.time(),
             "detected": False,
@@ -77,7 +83,7 @@ class VoiceService(object):
             "search_started_time": None,
             "played": False,
             "played_time": None,
-            "timeout": float(timeout),
+            "timeout": timeout,
             "timed_out": False
         }
         self.prompts[str(prompt['id'])] = prompt
