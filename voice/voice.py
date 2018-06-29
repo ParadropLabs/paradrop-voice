@@ -115,7 +115,9 @@ class VoiceService(object):
         Get the system status.
         """
         status = {
+            "current_prompt": self.current_prompt,
             "in_speech": self.decoder.get_in_speech(),
+            "queue_length": len(self.prompt_queue),
             "search": self.decoder.get_search()
         }
         return status
