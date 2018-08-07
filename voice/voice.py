@@ -3,33 +3,17 @@ from __future__ import print_function
 import os
 import time
 import tempfile
+import vlc
 
 import pyttsx3
 import queue
 import sphinxbase
 from pocketsphinx import Decoder, get_model_path
 
-AUDIO_CACHE = {}
 
 def play_audio(url):
-    import pygame
-    pygame.init()
-    data = ""
-    if url in AUDIO_CACHE:
-        data = AUDIO_CACHE[url]
-    else:
-        r = requests.get(url)
-        data = r.content
-        AUDIO_CACHE[url] = data
-    tmp = tempfile.NamedTemporaryFile()
-    with open(tmp.name, 'wb') as f:
-        f.write(data)
-    #pygame.init()
-    pygame.mixer.music.load(tmp.name)
-    pygame.mixer.music.play()
-    time.sleep(7) 
-    pygame.mixer.music.stop()
-    #thread.exit()
+    p = vlc.MediaPlayer(url)
+    p.play()
 
 def get_decoder_config():
     """
@@ -200,6 +184,7 @@ class VoiceService(object):
     def run(self):
         self.decoder.set_keyphrase("allow", "allow")
         self.decoder.set_keyphrase("enable", "enable")
+        self.decoder.set_keyphrase("activate", "activate")
         self.decoder.set_keyphrase("paradrop", "para drop")
 
         self.audio.start_recording()
