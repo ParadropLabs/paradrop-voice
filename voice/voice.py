@@ -10,12 +10,20 @@ import queue
 import sphinxbase
 from pocketsphinx import Decoder, get_model_path
 
+AUDIO_CACHE = {}
+
 def play_audio(url):
     import pygame
-    r = requests.get(url)
+    data = ""
+    if (!AUDIO_CACHE[url]):
+        r = requests.get(url)
+        data = r.content
+        AUDIO_CACHE[url] = data
+    else:
+        data = AUDIO_CACHE[url]
     tmp = tempfile.NamedTemporaryFile()
     with open(tmp.name, 'wb') as f:
-        f.write(r.content)
+        f.write(data)
     pygame.init()
     pygame.mixer.music.load(tmp.name)
     pygame.mixer.music.play()
