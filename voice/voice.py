@@ -15,7 +15,7 @@ AUDIO_CACHE = {}
 def play_audio(url):
     import pygame
     data = ""
-    if (!AUDIO_CACHE[url]):
+    if url in AUDIO_CACHE:
         r = requests.get(url)
         data = r.content
         AUDIO_CACHE[url] = data
