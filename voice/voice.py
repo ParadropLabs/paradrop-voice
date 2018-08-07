@@ -3,7 +3,6 @@ from __future__ import print_function
 import os
 import time
 import tempfile
-import pygame
 
 import pyttsx3
 import queue
@@ -13,6 +12,8 @@ from pocketsphinx import Decoder, get_model_path
 AUDIO_CACHE = {}
 
 def play_audio(url):
+    import pygame
+    pygame.init()
     data = ""
     if url in AUDIO_CACHE:
         data = AUDIO_CACHE[url]
@@ -61,7 +62,6 @@ class VoiceService(object):
         self.decoder = Decoder(config)
 
         self.speech = pyttsx3.init()
-        pygame.init()
 
         self.audio = sphinxbase.Ad(self.audio_device, self.sampling_rate)
         self.buffer = bytearray(self.buffer_size)
