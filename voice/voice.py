@@ -3,7 +3,7 @@ from __future__ import print_function
 import os
 import time
 import tempfile
-import thread
+import pygame
 
 import pyttsx3
 import queue
@@ -13,7 +13,6 @@ from pocketsphinx import Decoder, get_model_path
 AUDIO_CACHE = {}
 
 def play_audio(url):
-    import pygame
     data = ""
     if url in AUDIO_CACHE:
         data = AUDIO_CACHE[url]
@@ -24,12 +23,12 @@ def play_audio(url):
     tmp = tempfile.NamedTemporaryFile()
     with open(tmp.name, 'wb') as f:
         f.write(data)
-    pygame.init()
+    #pygame.init()
     pygame.mixer.music.load(tmp.name)
     pygame.mixer.music.play()
-    time.sleep(10) 
+    time.sleep(7) 
     pygame.mixer.music.stop()
-    thread.exit()
+    #thread.exit()
 
 def get_decoder_config():
     """
@@ -62,6 +61,7 @@ class VoiceService(object):
         self.decoder = Decoder(config)
 
         self.speech = pyttsx3.init()
+        pygame.init()
 
         self.audio = sphinxbase.Ad(self.audio_device, self.sampling_rate)
         self.buffer = bytearray(self.buffer_size)
@@ -167,11 +167,11 @@ class VoiceService(object):
             self.audio.stop_recording()
             #self.speech.say(self.current_prompt['message'])
             if self.current_prompt['message_url'] is not None:
-                thread.start_new_thread(playAudio, ( self.current_prompt['message_url'],))
-                
+                #thread.start_new_thread(playAudio, ( self.current_prompt['message_url'],))
+                playAudio(self.current_prompt['message_url'])
                 self.current_prompt['played'] = True
             self.current_prompt['played_time'] = time.time()
-            self.speech.runAndWait()
+            #self.speech.runAndWait()
             self.audio.start_recording()
 
         self.current_prompt['search_started_time'] = time.time()
