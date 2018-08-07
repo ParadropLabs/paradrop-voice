@@ -16,11 +16,11 @@ def play_audio(url):
     import pygame
     data = ""
     if url in AUDIO_CACHE:
+        data = AUDIO_CACHE[url]
+    else:
         r = requests.get(url)
         data = r.content
         AUDIO_CACHE[url] = data
-    else:
-        data = AUDIO_CACHE[url]
     tmp = tempfile.NamedTemporaryFile()
     with open(tmp.name, 'wb') as f:
         f.write(data)
