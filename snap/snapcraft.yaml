@@ -30,8 +30,8 @@ parts:
     build-packages:
       - libpulse-dev
       - swig 
-      - libglu1-mesa
-      - libgl1-mesa-dri 
+      - libsdl1.2-dev
+      - libfreetype6-dev
     stage-packages:
       - libespeak1
       - libpocketsphinx3
