@@ -29,13 +29,11 @@ parts:
     build-packages: 
       - libbz2-dev
       - libexpat1-dev
-      - libpng12-dev
       - pkg-config
       - zlib1g
     stage-packages:
       - libbz2-1.0
       - libexpat1
-      - libpng12-0,
       - zlib1g
 
   paradrop-voice:
