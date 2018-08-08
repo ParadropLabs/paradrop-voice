@@ -32,7 +32,7 @@ parts:
       - swig 
       - libsdl1.2-dev
       - libfreetype6-dev
-      - freetype2
+      - freetype
     stage-packages:
       - libespeak1
       - libpocketsphinx3
