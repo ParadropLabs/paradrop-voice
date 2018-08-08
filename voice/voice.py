@@ -6,6 +6,7 @@ import time
 import pyttsx3
 import queue
 import sphinxbase
+import subprocess
 from pocketsphinx import Decoder, get_model_path
 
 
@@ -55,7 +56,7 @@ class VoiceService(object):
         self.current_prompt = None
         self.prompt_queue = queue.Queue()
 
-    def create_prompt(self, message=None, search="enable", timeout=15):
+    def create_prompt(self, message=None, message_url=None, search="enable", timeout=15):
         """
         Create a new prompt and add it to the queue.
 
@@ -78,6 +79,7 @@ class VoiceService(object):
             "detected_time": None,
             "id": self.get_next_prompt_id(),
             "message": message,
+            "message_url": message_url,
             "search": search,
             "search_started": False,
             "search_started_time": None,
@@ -122,6 +124,18 @@ class VoiceService(object):
         }
         return status
 
+    def play_prompt(self, prompt):
+        prompt['played_time'] = time.time()
+
+        if prompt.get("message_url", None) is not None:
+            cmd = ["mplayer", "-ao", "pulse", prompt['message_url']]
+            subprocess.call(cmd)
+        elif prompt.get("message", None) is not None:
+            self.speech.say(prompt['message'])
+            self.speech.runAndWait()
+
+        prompt['played'] = True
+
     def process_hypothesis(self, hypothesis):
         print("SPEECH {}".format(hypothesis.hypstr))
 
@@ -140,13 +154,9 @@ class VoiceService(object):
         self.current_prompt = self.prompt_queue.get_nowait()
         self.decoder.set_search(self.current_prompt['search'])
 
-        if self.current_prompt['message'] is not None:
-            self.audio.stop_recording()
-            self.speech.say(self.current_prompt['message'])
-            self.current_prompt['played_time'] = time.time()
-            self.speech.runAndWait()
-            self.current_prompt['played'] = True
-            self.audio.start_recording()
+        self.audio.stop_recording()
+        self.play_prompt(self.current_prompt)
+        self.audio.start_recording()
 
         self.current_prompt['search_started_time'] = time.time()
         self.current_prompt['search_started'] = True

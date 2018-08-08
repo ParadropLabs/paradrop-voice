@@ -32,9 +32,13 @@ parts:
       - swig
     stage-packages:
       - libespeak1
+      - libgpm2
       - libpocketsphinx3
       - libpulse0
+      - mplayer
+      - samba-libs
     organize:
-      # For some reason, the libpulsecommon .so file could not be found in its
-      # default install location, so move it to a place where it can be found.
-      usr/lib/x86_64-linux-gnu/pulseaudio/libpulsecommon-8.0.so: usr/lib/x86_64-linux-gnu/libpulsecommon-8.0.so
+      # Make sure required libraries appear in a directory where they will be
+      # found.
+      usr/lib/*/samba/*: usr/lib/
+      usr/lib/*/pulseaudio/*: usr/lib
