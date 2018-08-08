@@ -14,25 +14,25 @@ from pocketsphinx import Decoder, get_model_path
 AUDIO_CACHE = {}
 
 def play_audio(url):
-    import pygame
-    filename = ""
-    if url in AUDIO_CACHE:
-        filename = AUDIO_CACHE[url]
-    else:
-        r = requests.get(url)
-        data = r.content
-        tmp = tempfile.NamedTemporaryFile()
-        with open(tmp.name, 'wb') as f:
-            f.write(data)
-        filename = tmp.name
-        AUDIO_CACHE[url] = filename
-    pygame.init()
-    pygame.mixer.music.load(filename)
-    pygame.mixer.music.play()
-    time.sleep(8)
-    pygame.mixer.music.stop()
-    #p = vlc.MediaPlayer(url)
-    #p.play()
+    #import pygame
+    #filename = ""
+    #if url in AUDIO_CACHE:
+    #    filename = AUDIO_CACHE[url]
+    #else:
+    #    r = requests.get(url)
+    #    data = r.content
+    #    tmp = tempfile.NamedTemporaryFile()
+    #    with open(tmp.name, 'wb') as f:
+    #        f.write(data)
+    #    filename = tmp.name
+    #    AUDIO_CACHE[url] = filename
+    #pygame.init()
+    #pygame.mixer.music.load(filename)
+    #pygame.mixer.music.play()
+    #time.sleep(8)
+    #pygame.mixer.music.stop()
+    p = vlc.MediaPlayer(url)
+    p.play()
 
 def get_decoder_config():
     """

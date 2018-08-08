@@ -45,6 +45,7 @@ parts:
       - swig 
       - libfreetype6-dev
       - libsdl1.2-dev
+      - vlc
     stage-packages:
       - libespeak1
       - libpocketsphinx3
@@ -53,6 +54,7 @@ parts:
       - libgl1-mesa-dri
       - libfreetype6-dev
       - libsdl1.2-dev
+      - vlc  
     organize:
       # For some reason, the libpulsecommon .so file could not be found in its
       # default install location, so move it to a place where it can be found.
