@@ -2,51 +2,11 @@ from __future__ import print_function
 
 import os
 import time
-import tempfile
-#import vlc
-import requests
 
 import pyttsx3
 import queue
 import sphinxbase
 from pocketsphinx import Decoder, get_model_path
-
-AUDIO_CACHE = {}
-
-def play_audio(url):
-    #import pygame
-    #filename = ""
-    #if url in AUDIO_CACHE:
-    #    filename = AUDIO_CACHE[url]
-    #else:
-    #    r = requests.get(url)
-    #    data = r.content
-    #    tmp = tempfile.NamedTemporaryFile()
-    #    with open(tmp.name, 'wb') as f:
-    #        f.write(data)
-    #    filename = tmp.name
-    #    AUDIO_CACHE[url] = filename
-    #pygame.init()
-    #pygame.mixer.music.load(filename)
-    #pygame.mixer.music.play()
-    #time.sleep(8)
-    #pygame.mixer.music.stop()
-    ###################################
-    #p = vlc.MediaPlayer(url)
-    #p.play()
-    ###################################
-    filename = ""
-    if url in AUDIO_CACHE:
-        filename = AUDIO_CACHE[url]
-    else:
-        r = requests.get(url)
-        data = r.content
-        tmp = tempfile.NamedTemporaryFile()
-        with open(tmp.name, 'wb') as f:
-            f.write(data)
-        filename = tmp.name
-        AUDIO_CACHE[url] = filename
-    os.system('mpg321 ' + filename)    
 
 
 def get_decoder_config():
@@ -95,7 +55,7 @@ class VoiceService(object):
         self.current_prompt = None
         self.prompt_queue = queue.Queue()
 
-    def create_prompt(self, message=None, message_url=None, search="enable", timeout=15):
+    def create_prompt(self, message=None, search="enable", timeout=15):
         """
         Create a new prompt and add it to the queue.
 
@@ -118,7 +78,6 @@ class VoiceService(object):
             "detected_time": None,
             "id": self.get_next_prompt_id(),
             "message": message,
-            "message_url": message_url,
             "search": search,
             "search_started": False,
             "search_started_time": None,
@@ -183,12 +142,10 @@ class VoiceService(object):
 
         if self.current_prompt['message'] is not None:
             self.audio.stop_recording()
-            #self.speech.say(self.current_prompt['message'])
-            if self.current_prompt['message_url'] is not None:
-                play_audio(self.current_prompt['message_url'])
-            self.current_prompt['played'] = True
+            self.speech.say(self.current_prompt['message'])
             self.current_prompt['played_time'] = time.time()
-            #self.speech.runAndWait()
+            self.speech.runAndWait()
+            self.current_prompt['played'] = True
             self.audio.start_recording()
 
         self.current_prompt['search_started_time'] = time.time()
@@ -218,7 +175,6 @@ class VoiceService(object):
     def run(self):
         self.decoder.set_keyphrase("allow", "allow")
         self.decoder.set_keyphrase("enable", "enable")
-        self.decoder.set_keyphrase("activate", "activate")
         self.decoder.set_keyphrase("paradrop", "para drop")
 
         self.audio.start_recording()

@@ -29,7 +29,7 @@ parts:
     source: .
     build-packages:
       - libpulse-dev
-      - swig 
+      - swig
     stage-packages:
       - libespeak1
       - libpocketsphinx3

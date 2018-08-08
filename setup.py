@@ -15,8 +15,7 @@ setup(name="paradrop-voice",
           "pocketsphinx==0.1.3",
           "pyttsx3==2.7",
           "requests==2.18.4",
-          "urllib3==1.22",
-          "python-vlc==3.0.102"
+          "urllib3==1.22"
       ],
       entry_points={
           "console_scripts": [
