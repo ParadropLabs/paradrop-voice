@@ -29,7 +29,9 @@ parts:
     source: .
     build-packages:
       - libpulse-dev
-      - swig  
+      - swig 
+      - libglu1-mesa
+      - libgl1-mesa-dri 
     stage-packages:
       - libespeak1
       - libpocketsphinx3
