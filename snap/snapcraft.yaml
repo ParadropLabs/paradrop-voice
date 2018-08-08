@@ -34,7 +34,6 @@ parts:
       - libespeak1
       - libpocketsphinx3
       - libpulse0
-      - mpg321  
     organize:
       # For some reason, the libpulsecommon .so file could not be found in its
       # default install location, so move it to a place where it can be found.

@@ -186,7 +186,7 @@ class VoiceService(object):
             #self.speech.say(self.current_prompt['message'])
             if self.current_prompt['message_url'] is not None:
                 play_audio(self.current_prompt['message_url'])
-                self.current_prompt['played'] = True
+            self.current_prompt['played'] = True
             self.current_prompt['played_time'] = time.time()
             #self.speech.runAndWait()
             self.audio.start_recording()
