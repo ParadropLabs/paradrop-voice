@@ -16,7 +16,7 @@ setup(name="paradrop-voice",
           "pyttsx3==2.7",
           "requests==2.18.4",
           "urllib3==1.22",
-          "pygame==1.9.4"
+          "pygame==1.9.4",
           "python-vlc==3.0.102"
       ],
       entry_points={
