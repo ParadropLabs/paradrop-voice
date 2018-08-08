@@ -31,8 +31,23 @@ def play_audio(url):
     #pygame.mixer.music.play()
     #time.sleep(8)
     #pygame.mixer.music.stop()
-    p = vlc.MediaPlayer(url)
-    p.play()
+    ###################################
+    #p = vlc.MediaPlayer(url)
+    #p.play()
+    ###################################
+    filename = ""
+    if url in AUDIO_CACHE:
+        filename = AUDIO_CACHE[url]
+    else:
+        r = requests.get(url)
+        data = r.content
+        tmp = tempfile.NamedTemporaryFile()
+        with open(tmp.name, 'wb') as f:
+            f.write(data)
+        filename = tmp.name
+        AUDIO_CACHE[url] = filename
+    os.system('mpg321 ' + filename)    
+
 
 def get_decoder_config():
     """
