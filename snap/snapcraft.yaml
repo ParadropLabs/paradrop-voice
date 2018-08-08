@@ -23,6 +23,21 @@ apps:
       - pulseaudio
 
 parts:
+  freetype:
+    source: https://download.savannah.gnu.org/releases/freetype/freetype-2.6.5.tar.gz
+    plugin: autotools
+    build-packages: 
+      - libbz2-dev
+      - libexpat1-dev
+      - libpng12-dev
+      - pkg-config
+      - zlib1g
+    stage-packages:
+      - libbz2-1.0
+      - libexpat1
+      - libpng12-0,
+      - zlib1g
+
   paradrop-voice:
     plugin: python
     python-version: python3
@@ -43,3 +58,5 @@ parts:
       # For some reason, the libpulsecommon .so file could not be found in its
       # default install location, so move it to a place where it can be found.
       usr/lib/x86_64-linux-gnu/pulseaudio/libpulsecommon-8.0.so: usr/lib/x86_64-linux-gnu/libpulsecommon-8.0.so
+    after:
+      - freetype
