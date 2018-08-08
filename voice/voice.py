@@ -173,6 +173,7 @@ class VoiceService(object):
             return diff >= self.current_prompt['timeout']
 
     def run(self):
+        self.decoder.set_keyphrase("activate", "activate")
         self.decoder.set_keyphrase("allow", "allow")
         self.decoder.set_keyphrase("enable", "enable")
         self.decoder.set_keyphrase("paradrop", "para drop")
