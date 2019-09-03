@@ -15,7 +15,7 @@ apps:
     daemon: simple
     restart-condition: always
     environment:
-      ESPEAK_DATA_PATH: $SNAP/usr/lib/x86_64-linux-gnu
+      ESPEAK_DATA_PATH: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
     plugs:
       - mount-observe
       - network
