@@ -15,7 +15,7 @@ setup(name="paradrop-voice",
           "pocketsphinx==0.1.3",
           "pyttsx3==2.7",
           "requests==2.22.0",
-          "urllib3==1.25.3",
+          "urllib3==1.26.5",
           "Werkzeug==0.15.5"
       ],
       entry_points={
