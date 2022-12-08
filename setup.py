@@ -8,7 +8,7 @@ setup(name="paradrop-voice",
       url="https://paradrop.org",
       packages=find_packages(),
       install_requires=[
-          "certifi==2019.6.16",
+          "certifi==2022.12.7",
           "chardet==3.0.4",
           "Flask==1.0.2",
           "idna==2.8",
